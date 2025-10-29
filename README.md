@@ -1,6 +1,28 @@
-# claude code guide
+# Claude Code 완전 정복: 커맨드, 훅, 에이전트, 스킬 실전 활용 가이드
 
-클로드 코드는 agent, skill, hook, command 등을 통해 보다 확장성 있는 LLM 에이전트
+claude code란 Anthropic에서 만든 개발자용 AI 어시스턴트 입니다.
+
+클로드 코드는 agent, skill, hook, command 등을 통해 보다 확장성 있는 LLM 워크플로우를 구축할 수 있도록 도와줍니다.
+
+## 시작하며
+
+이 글을 통해 클로드 코드를 활용하여 코드 생산 뿐 아니라, 나만의 개발 워크플로우를 자동화하고 싶은 개발자 또는 LLM을 터미널 환경에 깊숙이 통합하고 싶은 DevOps 엔지니어가 읽기 적합합니다. 
+
+주로 다루는 내용은 다음과 같습니다.
+
+1. slash commands
+
+2. hooks
+
+3. sub agent
+
+4. skill
+
+5. plugin
+
+해당 내용을 실행하기 위해선 claude code 2.x 이상의 버전이 필요합니다. 
+
+만약, 1.x라면 2.x로 업데이트 해야합니다.
 
 ## slash commands
 
@@ -80,6 +102,8 @@ $ echo 'Review PR #$1 with priority $2 and assign to $3' > .claude/commands/revi
 ```
 
 ### 파일 참조
+
+@를 이용하면 파일을 참조할 수 있습니다.
 
 ```sh
 $ echo 'Compare @src/need_debugger.py with @src/need_review.py' > .claude/commands/referrence-file.md 
@@ -168,7 +192,34 @@ $ echo 'Compare @src/need_debugger.py with @src/need_review.py' > .claude/comman
 
 커맨드 정의를 위한 마크다운 파일에 !`배시 명령어` 형태로 배시 명령어를 추가할 수 있습니다.
 
+* 구조
+
 ```
+---
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
+argument-hint: [message]
+description: Create a git commit
+model: claude-3-5-haiku-20241022
+---
+
+Create a git commit with message: $ARGUMENTS
+```
+
+allowed-tools: 명령어가 사용할 수 있는 도구 목록
+
+argument-hint: 슬래시 명령어에 필요한 인수
+
+description: 명령어의 간단한 설명
+
+model: 특정 모델 문자열
+
+disable-model-invocation: 슬래시 명령어가 호출하지 말아야 하는 명령어
+
+* 깃 변경 사항을 읽어 커밋 메시지 만들기
+
+./claude/commands/bash-command.md
+
+```markdown
 ---
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
 description: Create a git commit
@@ -184,6 +235,91 @@ description: Create a git commit
 ## Your task
 
 Based on the above changes, create a single git commit.
+```
+
+* 명령어 사용
+
+```
+> /bash-command
+
+> /bash-command is running… 
+  ⎿  Allowed 3 tools for this command
+
+⏺ I can see there's a modification to README.md that adds documentation about bash
+   command execution in command definitions. Let me create a commit for this
+  change.
+
+⏺ Bash(git add README.md && git commit -m "Add documentation for bash command
+      execution in custom commands…)
+  ⎿ [main 5fb2eb9] Add documentation for bash command execution in custom command
+    s
+     1 file changed, 22 insertions(+)
+
+
+⏺ Bash(git status)
+  ⎿  On branch main                                              
+     Changes not staged for commit:
+       (use "git add <file>..." to update what will be committed)
+     … +4 lines (ctrl+o to expand)
+
+⏺ Commit created successfully! The changes to README.md have been committed with
+  the message documenting the new bash command execution feature.
+
+  I notice there's also a modification to .claude/bash-command-log.txt, which
+  appears to be a log file. Would you like me to commit that as well, or should we
+   ignore log files?
+```
+
+깃 로그를 살펴보면 다음과 같이 로그가 생성된 것을 확인할 수 있습니다.
+
+```bash
+$ git log
+
+commit 5fb2eb93632702846b8d7f1bf344cba7f97fa2fc (HEAD -> main)
+Author: pjt3591oo <pjt3591oo@maskit.co.kr>
+Date:   Thu Oct 30 04:48:28 2025 +0900
+
+    Add documentation for bash command execution in custom commands
+    
+    Added Korean documentation explaining how to use !`bash command` syntax in command definition markdown files, with a practical example showing git-related commands.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+commit 72c2cda2ec614f5f3ef28e56262e9c6e44a1046a
+Author: pjt3591oo <pjt3591oo@maskit.co.kr>
+Date:   Thu Oct 30 04:47:24 2025 +0900
+
+    first commit
+```
+
+### 네이티브 명령어 지원
+
+클로드 코드는 네이티브 수준에서 기본 명령어를 제공합니다.
+
+/mcp, /plugin, /hook, /agents 등
+
+사용 가능한 명령어는 클로드 프롬프트에 /를 입력하면 사용 가능한 명령어 목록을 확인할 수 있습니다.
+
+```
+──────────────────────────────────────────────────────────────────────────────────────
+> / 
+──────────────────────────────────────────────────────────────────────────────────────
+  /doctor                          Diagnose and verify your Claude Code installation
+                                   and settings
+  /exit (quit)                     Exit the REPL
+  /export                          Export the current conversation to a file or
+                                   clipboard
+  /feedback (bug)                  Submit feedback about Claude Code
+  /help                            Show help and available commands
+  /hooks                           Manage hook configurations for tool events
+  /ide                             Manage IDE integrations and show status
+  /init                            Initialize a new CLAUDE.md file with codebase
+                                   documentation
+  /install-github-app              Set up Claude GitHub Actions for a repository
+  /login                           Sign in with your Anthropic account
+
 ```
 
 ## hooks
@@ -357,6 +493,8 @@ jq -r '.tool_input | \"[\" + (.description // \"No description\") + \"] \" + .co
 저장이 된다면 다음과 같이 결과를 확인 가능 
 
 `./claude/settings.local.json` 형태로 관리됨
+
+settings.local.json은 로컬 전용이므로 깃에 의해 관리되지 않습니다. .gitignore에 추가하지 않더라도 깃에 올라가지 않습니다.
 
 ```
 ╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
@@ -699,6 +837,33 @@ Return formatted result
 - Always follow the skill's procedures
 - Provide clear, formatted output
 ```
+
+### skills과 slash commands의 구분
+
+동작 방식을 보면 skill과 slash commands의 구분이 모호할 수 있습니다. 
+
+* 복잡도
+
+slash command < skills
+
+* 구조
+
+slash command: 단일 .md 파일, 단일 파일로 정의됨
+
+skills: **SKILL.md** 리소스가 있는 디렉토리, 여러 파일을 가짐(스크립트, 템필릿 등)
+
+* 사용
+
+slash command: /(슬래시)를 이용한 명시적인 호출
+
+skills: 컨텍스트 기반 자동으로 호출
+
+
+* 공통점
+
+~/.claude 또는 .claude/ 아래에서 관리
+
+.claude/ 아래에 관리될 경우 깃을 통해 공유 가능
 
 ## plugin 
 

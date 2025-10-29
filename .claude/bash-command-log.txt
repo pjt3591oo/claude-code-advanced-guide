@@ -1,4 +1,0 @@
-[Print current working directory] pwd
-[List all files with details] ls -ahl
-[Fetch PR #456 details from GitHub] gh pr view 456 --json title,body,author,state,headRefName,baseRefName,files,commits
-[Fetch issue #123 details from GitHub] gh issue view 123 --json title,body,labels,state,comments
