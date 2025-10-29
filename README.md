@@ -513,6 +513,26 @@ settings.local.json은 로컬 전용이므로 깃에 의해 관리되지 않습�
 
 ```
 
+생성된 훅 파일은 다음과 같습니다. 앞의 일련의 과정을 거치지 않고 .claude 아래에 `settings.*.json` 형태로 저장하면 훅 정의가 완료 됩니다.
+
+```json
+  {
+    "hooks": {
+      "PreToolUse": [
+        {
+          "matcher": "Bash",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "jq -r '.tool_input | \"[\" + (.description // \"No description\") + \"] \" + .command' >> \"$CLAUDE_PROJECT_DIR/.claude/bash-command-log.txt\""
+            }
+          ]
+        }
+      ]
+    }
+  }
+```
+
 ### 훅 호출 테스트
 
 클로드를 재시작 한 후 아무런 bash 명령어를 수행합니다.
