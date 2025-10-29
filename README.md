@@ -164,6 +164,28 @@ $ echo 'Compare @src/need_debugger.py with @src/need_review.py' > .claude/comman
   code-reviewer agent (works but could be reviewed for quality).
 ```
 
+### Bash 명령어 실행
+
+커맨드 정의를 위한 마크다운 파일에 !`배시 명령어` 형태로 배시 명령어를 추가할 수 있습니다.
+
+```
+---
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
+description: Create a git commit
+---
+
+## Context
+
+- Current git status: !`git status`
+- Current git diff (staged and unstaged changes): !`git diff HEAD`
+- Current branch: !`git branch --show-current`
+- Recent commits: !`git log --oneline -10`
+
+## Your task
+
+Based on the above changes, create a single git commit.
+```
+
 ## hooks
 
 `/hooks` 명령어를 통해 훅 관리 가능
