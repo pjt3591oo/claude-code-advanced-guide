@@ -1,4 +1,4 @@
-# Claude Code 완전 정복: 커맨드, 훅, 에이전트, 스킬 실전 활용 가이드
+# Claude Code 완전 정복: 커맨드, 훅, 에이전트, 스킬, 플러그인 가이드
 
 claude code란 Anthropic에서 만든 개발자용 AI 어시스턴트 입니다.
 
