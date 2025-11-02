@@ -36,7 +36,7 @@ $ shell 명령어
 
 클로드 코드는 이미 정의된 명령어 또는 사용자 정의 슬래시 명령어를 다음과 같이 사용이 가능 합니다.
 
-사용자 정의 슬래시는 `~/.claude/commands` 또는 `./claude/commands` 경로에 마크다운 파일로 관리됩니다.
+사용자 정의 슬래시는 `~/.claude/commands` 또는 `.claude/commands` 경로에 마크다운 파일로 관리됩니다.
 
 ```claude
 > /[command-name] [arguments]
@@ -44,7 +44,7 @@ $ shell 명령어
 
 또는 네임스페이스를 다음과 같이 지정할 수 있습니다.
 
-`~/.claude/[NAMESPACE]/commands` 또는 `./claude/[NAMESPACE]/commands`
+`~/.claude/[NAMESPACE]/commands` 또는 `.claude/[NAMESPACE]/commands`
 
 ```claude
 > /[NAMESPACE]:[command-name] [arguments]
@@ -225,7 +225,7 @@ disable-model-invocation: 슬래시 명령어가 호출하지 말아야 하는 �
 
 * 깃 변경 사항을 읽어 커밋 메시지 만들기
 
-./claude/commands/bash-command.md
+.claude/commands/bash-command.md
 
 ```markdown
 ---
@@ -500,7 +500,7 @@ jq -r '.tool_input | \"[\" + (.description // \"No description\") + \"] \" + .co
 
 저장이 된다면 다음과 같이 결과를 확인 가능 
 
-`./claude/settings.local.json` 형태로 관리됨
+`.claude/settings.local.json` 형태로 관리됨
 
 settings.local.json은 로컬 전용이므로 깃에 의해 관리되지 않습니다. .gitignore에 추가하지 않더라도 깃에 올라가지 않습니다.
 
@@ -575,7 +575,7 @@ $ cat .claude/bash-command-log.txt
 
 ### 에이전트 정의
 
-서브 에이전트를 위해 `./claude/agents` 또는 `~/.claude/agents` 아래에 마크다운 형식으로 에이전트를 정의할 수 있다.
+서브 에이전트를 위해 `.claude/agents` 또는 `~/.claude/agents` 아래에 마크다운 형식으로 에이전트를 정의할 수 있다.
 
 ```markdown
 ---
@@ -631,7 +631,7 @@ skill은 agent와 유사하지만 동작 메커니즘이 다름.
 
 skill은 MCP로 비유를 하면 실제 로직이 호출되는 tool(sub agent의 tool과 다른 개념, 실제 작업을 처리하는 함수) 
 
-클로드 코드의 스킬 사용을 위해 `./claude/skills/[스킬 이름]/SKILL.md` 또는 `~/.claude/skills/[스킬이름]/SKILL.md` 아래에 마크다운 형식으로 스킬을 정의할 수 있다.
+클로드 코드의 스킬 사용을 위해 `.claude/skills/[스킬 이름]/SKILL.md` 또는 `~/.claude/skills/[스킬이름]/SKILL.md` 아래에 마크다운 형식으로 스킬을 정의할 수 있다.
 
 skill을 관리하는 별도의 명령어 없음.(서브 에이전트, 플러그인, 훅은 /agent, /plugin, /hook 명령어를 가짐)
 
