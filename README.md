@@ -906,22 +906,6 @@ skills: 컨텍스트 기반 자동으로 호출
 
 클로드 코드가 제공하는 커맨드, 에이전트, 스킬, 훅 등을 손쉽게 공유하여 사용 가능
 
-### 마켓 플레이스 지정
-
-플러그인을 이용하기 위해 플러그인의 위치가 어디있는지 정의가 필요함.
-
-```claude
-> /plugin marketplace add ./
-```
-
-### 플러그인 설치
-
-마켓 플레이스에 정의된 plugins 설치 가능.
-
-```claude
-> /plugin install my-first-plugin
-```
-
 ### 플러그인 구조
 
 ```
@@ -939,7 +923,38 @@ my-first-plugin/
     └── hooks.json
 ```
 
-사용 usage
+* plugin.json
+
+```json
+{
+  "name": "my-first-plugin",
+  "description": "A simple greeting plugin to learn the basics",
+  "version": "1.0.0",
+  "author": {
+    "name": "Your Name"
+  }
+}
+```
+
+### 마켓 플레이스 추가
+
+플러그인을 이용하기 위해 플러그인의 위치가 어디있는지 정의가 필요함.
+
+```claude
+> /plugin marketplace add ./
+```
+
+### 플러그인 설치
+
+마켓 플레이스에 정의된 plugins 설치 가능.
+
+```claude
+> /plugin install my-first-plugin
+```
+
+
+
+### 사용
 
 다음과 같이 호출 가능 `/[플러그인 이름]:[커맨드|에이전트|스킬|훅]`
 
