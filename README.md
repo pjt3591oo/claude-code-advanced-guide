@@ -944,7 +944,6 @@ my-first-plugin/
 
 ```
 $ git clone https://github.com/pjt3591oo/claude-code-advanced-guide.git
-$ cd claude-code-advanced-guide
 $ claude
 
 > /plugin marketplace add [git clone으로 내려받은 폴더]
