@@ -6,8 +6,13 @@
   "plugins": [
     {
       "name": "my-first-plugin",
-      "source": "../my-first-plugin",
+      "source": "./my-first-plugin",
       "description": "My first test plugin"
+    },
+    {
+      "name": "mod-explorer",
+      "source": "./mods/mod-explorer",
+      "description": "Adds an /explorer command that opens a file explorer pane rooted at the folder Claude Code was started in"
     }
   ]
 }

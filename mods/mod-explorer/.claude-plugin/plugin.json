@@ -1,0 +1,6 @@
+{
+  "name": "mod-explorer",
+  "version": "0.2.0",
+  "description": "Adds an /explorer command that opens a file explorer pane rooted at the folder Claude Code was started in",
+  "author": { "name": "pjt3591oo" }
+}

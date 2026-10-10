@@ -940,19 +940,41 @@ my-first-plugin/
 
 플러그인을 이용하기 위해 플러그인의 위치가 어디있는지 정의가 필요함.
 
+* 로컬의 마켓플레이스 경로
+
+```
+$ git clone https://github.com/pjt3591oo/claude-code-advanced-guide.git
+$ cd claude-code-advanced-guide
+$ claude
+
+> /plugin marketplace add [git clone으로 내려받은 폴더]
+```
+
+* 깃 마켓플레이스 경로
+
 ```claude
-> /plugin marketplace add ./
+$ claude
+
+> /plugin marketplace add https://github.com/pjt3591oo/claude-code-advanced-guide.git
 ```
 
 ### 플러그인 설치
 
 마켓 플레이스에 정의된 plugins 설치 가능.
 
+* 커맨드
+
 ```claude
-> /plugin install my-first-plugin
+> /plugin install my-first-plugin@my-first-plugin-marketplace
 ```
 
+* mods
 
+mods를 사용하기 위해서는 버전 `v2.1.287` 이상 필요.
+
+```claude
+> /plugin install mod-explorer@my-first-plugin-marketplace
+```
 
 ### 사용
 
@@ -960,6 +982,10 @@ my-first-plugin/
 
 ```claude
 > /my-first-plugin:hello
+```
+
+```claude
+> /explorer
 ```
 
 ## 마지막
