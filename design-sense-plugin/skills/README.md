@@ -4,6 +4,14 @@
 
 스킬 이름은 `design-sense`이며, 실행 지침의 기준 문서는 [SKILL.md](SKILL.md)입니다.
 
+## 사용 가이드
+
+사용하는 코딩용 에이전트 도구를 -a으로 명시
+
+```
+$ npx skills add https://github.com/pjt3591oo/claude-code-advanced-guide/tree/main/design-sense-plugin -a claude-code -a opencode -a codex
+```
+
 ## 언제 사용하나요?
 
 - 새로운 제품의 UI와 대표 사용자 흐름을 설계하고 구현할 때
