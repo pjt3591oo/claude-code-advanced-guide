@@ -1,7 +1,7 @@
 ---
 name: greeting-manager
 description: Greeting message specialist. Creates personalized greetings in multiple languages. Use for greeting generation, welcome messages, or hello text.
-tools: bash,read
+tools: Bash, Read
 ---
 
 # Greeting Manager

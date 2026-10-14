@@ -1,14 +1,8 @@
 ---
 name: greet_user
-description: 템플릿을 사용하여 사용자에게 맞춤형 인사를 건넵니다.
-parameters:
-  - name: user_name
-    type: string
-    description: 인사할 사용자의 이름
-    required: true
-runtime: python
-entrypoint: scripts/hello.py
-allowed-tools: Read, Grep, Glob
+description: 템플릿을 사용하여 사용자에게 맞춤형 인사를 건넵니다. 누군에게 인사해달라고 요청할 때 사용하세요.
+argument-hint: [이름]
+allowed-tools: Read, Grep, Glob, Bash
 ---
 
 ## 스킬 설명
