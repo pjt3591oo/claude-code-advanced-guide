@@ -4,6 +4,24 @@ claude code란 Anthropic에서 만든 개발자용 AI 어시스턴트 입니다.
 
 클로드 코드는 agent, skill, hook, command 등을 통해 보다 확장성 있는 LLM 워크플로우를 구축할 수 있도록 도와줍니다.
 
+해당 레포는 클로드 코드의 .claude 구성을 설명하고 있으며, 디자인에 도움되는 스킬을 제공하고 있습니다.
+
+### 디자인 시스템 스킬
+
+* /plguin 명령어 지원되는 환경
+
+```
+> /plugin marketplace add https://github.com/pjt3591oo/claude-code-advanced-guide.git
+
+> /plugin install design-sense-plugin@my-first-plugin-marketplace
+```
+
+* 빠르게 스킬 설치
+
+```
+> npx skills add https://github.com/pjt3591oo/claude-code-advanced-guide/tree/main/design-sense-plugin -a claude-code -a opencode -a codex
+```
+
 ## 시작하며
 
 이 글을 통해 클로드 코드를 활용하여 코드 생산 뿐 아니라, 나만의 개발 워크플로우를 자동화하고 싶은 개발자 또는 LLM을 터미널 환경에 깊숙이 통합하고 싶은 DevOps 엔지니어가 읽기 적합합니다. 
