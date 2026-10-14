@@ -1,0 +1,8 @@
+{
+  "name": "design-sense-plugin",
+  "description": "A plugin that provides design sense skills",
+  "version": "1.0.0",
+  "author": {
+    "name": "MonosChroma"
+  }
+}

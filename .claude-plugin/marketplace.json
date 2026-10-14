@@ -10,6 +10,11 @@
       "description": "My first test plugin"
     },
     {
+      "name": "design-sense-plugin",
+      "source": "./design-sense-plugin",
+      "description": "A plugin that provides design sense skills"
+    },
+    {
       "name": "mod-explorer",
       "source": "./mods/mod-explorer",
       "description": "Adds an /explorer command that opens a file explorer pane rooted at the folder Claude Code was started in"

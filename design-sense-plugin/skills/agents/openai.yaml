@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design Sense"
+  short_description: "제품 요구부터 화면·동작 설계, 구현과 실제 검증까지"
+  default_prompt: "$design-sense로 이 제품의 요구사항을 해석하고 필요한 설계 문서를 파생해 실제 동작하는 인터페이스를 구현·검증해줘."
+policy:
+  allow_implicit_invocation: true
